@@ -6,7 +6,7 @@ import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import { default as theme } from "./theme.json"
+import { theme } from './theme';
 
 export default function App () {
   const isLoadingComplete = useCachedResources();

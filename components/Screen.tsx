@@ -1,17 +1,29 @@
-import { Platform, SafeAreaView, StatusBar, StyleSheet, ViewStyle } from "react-native";
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  ViewStyle,
+} from "react-native";
 
 export const Screen = ({
-    children,
-    style
-}: { children: any, style?: ViewStyle }) => {
-    return <SafeAreaView style={[styles.container, style]}>
-        {children}
+  children,
+  style,
+}: {
+  children: any;
+  style?: ViewStyle;
+}) => {
+  return (
+    <SafeAreaView style={[styles.container, style]}>
+      <StatusBar barStyle="dark-content" />
+      {children}
     </SafeAreaView>
-}
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    }
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
 });

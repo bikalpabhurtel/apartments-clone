@@ -11,7 +11,7 @@ import SavedScreen from '../screens/SavedScreen';
 import SearchScreen from '../screens/SearchScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import { default as theme } from "../theme.json"
+import { theme } from '../theme';
 
 export default function Navigation ({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
