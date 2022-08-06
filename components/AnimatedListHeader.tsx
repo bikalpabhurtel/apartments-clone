@@ -18,8 +18,12 @@ import { Row } from "./Row";
 
 export const AnimatedListHeader = ({
   scrollAnimation,
+  mapShown,
+  setMapShown,
 }: {
   scrollAnimation: Animated.Value;
+  mapShown: boolean;
+  setMapShown: (bool: boolean) => void;
 }) => {
   const [offsetAnimation] = useState(new Animated.Value(0));
   const [clampedScroll, setClampedScroll] = useState(
@@ -76,7 +80,7 @@ export const AnimatedListHeader = ({
         <HeaderFilterButtons />
       </View>
       <Divider style={styles.divider} />
-      <HeaderLogistics />
+      <HeaderLogistics mapShown={mapShown} setMapShown={setMapShown} />
     </Animated.View>
   );
 };
