@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
+    backgroundColor: "#fff",
   },
   defaultMarginTop: {
     marginTop: 5,

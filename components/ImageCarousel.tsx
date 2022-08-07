@@ -15,7 +15,7 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
   const handlePressLeft = () => {
     if (activeIndex === 0) {
       return flatListRef.current?.scrollToIndex({
-        animated: true,
+        animated: false,
         index: images.length - 1,
       });
     }
@@ -28,7 +28,7 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
   const handlePressRight = () => {
     if (activeIndex === images.length - 1) {
       return flatListRef.current?.scrollToIndex({
-        animated: true,
+        animated: false,
         index: 0,
       });
     }
@@ -70,7 +70,7 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
 
 const styles = StyleSheet.create({
   image: {
-    height: 225,
+    height: 200,
     width: WIDTH,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
