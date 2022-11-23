@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
 import React, { useRef, useState } from "react";
 import MapView from "react-native-maps";
 import { Property } from "../types/property";
@@ -6,11 +6,23 @@ import { MapMarker } from "./MapMarker";
 import { theme } from "../theme";
 import { useNavigation } from "@react-navigation/native";
 import { Card } from "./Card";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export const Map = ({ properties }: { properties: Property[] }) => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const mapRef = useRef<MapView | null>(null);
   const navigation = useNavigation();
+
+  const onFocusProperty = () => {
+    setActiveIndex(-1);
+    navigation.setOptions({ tabBarStyle: { display: "flex" } });
+  };
+
+  const handleMapPress = () => {
+    if (Platform.OS === "android") {
+      onFocusProperty();
+    }
+  };
 
   const handleMarkerPress = (index: number) => {
     if (Platform.OS === "ios") {
@@ -28,7 +40,12 @@ export const Map = ({ properties }: { properties: Property[] }) => {
   };
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} userInterfaceStyle="light" ref={mapRef}>
+      <MapView
+        style={styles.map}
+        userInterfaceStyle="light"
+        ref={mapRef}
+        onPress={handleMapPress}
+      >
         {properties.map((i, index) => (
           <MapMarker
             key={i.id}
@@ -44,7 +61,18 @@ export const Map = ({ properties }: { properties: Property[] }) => {
         ))}
       </MapView>
       {activeIndex > -1 && (
-        <Card property={properties[activeIndex]} style={styles.card} />
+        <>
+          {Platform.OS === "ios" && (
+            <TouchableOpacity style={styles.exit} onPress={onFocusProperty}>
+              <MaterialCommunityIcons
+                name="close"
+                color={theme["color-primary-500"]}
+                size={24}
+              />
+            </TouchableOpacity>
+          )}
+          <Card property={properties[activeIndex]} style={styles.card} />
+        </>
       )}
     </View>
   );
@@ -57,5 +85,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 10,
     height: 360,
+  },
+  exit: {
+    backgroundColor: "#fff",
+    padding: 10,
+    position: "absolute",
+    top: 170,
+    left: 15,
+    borderRadius: 30,
   },
 });
